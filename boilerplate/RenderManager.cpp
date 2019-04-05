@@ -171,12 +171,22 @@ void RenderManager::renderTexture(ModelOBJ model, glm::mat4 view, glm::mat4 proj
 
 	glUniformMatrix4fv(glGetUniformLocation(model.shader, "rotation"), 1, false, glm::value_ptr(rotation));
 	glUniformMatrix4fv(glGetUniformLocation(model.shader, "scale"), 1, false, glm::value_ptr(scale));
+	
+	Light light = lights.at(0);
+	vector<float> intensity;
+	vector<glm::vec3> pos;
+	vector<glm::vec3> color;
 
-	ModelOBJ light = lights.at(0);
-
-	glUniform3f(glGetUniformLocation(model.shader, "lightPos"), light.translation.x, light.translation.y, light.translation.z);
-	glUniform3f(glGetUniformLocation(model.shader, "lightColor"), light.colour.x, light.colour.y, light.colour.z);
+	for (int i = 0; i < lights.size(); i++) {
+		intensity.push_back(lights.at(i).intensity);
+		pos.push_back(lights.at(i).model.translation);
+		color.push_back(lights.at(i).model.colour);
+	}
+	intensity.push_back(-1.0f);
+	glUniform3fv(glGetUniformLocation(model.shader, "lightPos"), pos.size(),(GLfloat*) &pos[0]);
+	glUniform3fv(glGetUniformLocation(model.shader, "lightColor"), color.size(), (GLfloat*) &color[0]);
 	glUniform3f(glGetUniformLocation(model.shader, "viewPos"), camPos.x, camPos.y, camPos.z);
+	glUniform1fv(glGetUniformLocation(model.shader, "intensity"), intensity.size(), &intensity[0]);
 
 
 	glActiveTexture(GL_TEXTURE0);
@@ -357,22 +367,25 @@ void RenderManager::initScene() {
 	generateFrameBuffer(&pingPong[0].frameBuffer, &(pingPong[0].frameBufferTexture[0]), WINDOW_WIDTH, WINDOW_HEIGHT);
 	generateFrameBuffer(&pingPong[1].frameBuffer, &(pingPong[1].frameBufferTexture[0]), WINDOW_WIDTH, WINDOW_HEIGHT);
 	Geometry box;
-	Gen3dModel("../res/box.obj", "../res/8k_stars_milky_way.jpg", box);
+	Gen3dModel("../res/box.obj", "../res/floor.png", box);
 
 	Geometry hoverCraft;
 	Gen3dModel("../res/HoverCar.obj", "../res/earth.png", hoverCraft);
 
 	Geometry plane;
-	generatePlane(plane);
+	generatePlane(plane,1,0.1f);
 	plane.tex = box.tex;
 	ModelOBJ boxOBJ(glm::vec3(0, -3, 0), glm::vec3(1, 1, 1), glm::vec3(PI_F / 2.0f, 0, 0), glm::vec3(100, 100, 1), plane, program);
 	texModels.push_back(boxOBJ);
 
-	ModelOBJ hoverCraftOBJ(glm::vec3(6, -1, 0), glm::vec3(1, 1, 1), glm::vec3(PI_F / 2.0f, 0, 0), glm::vec3(0.01f, 0.01f, 0.01f), hoverCraft, program);
+	ModelOBJ hoverCraftOBJ(glm::vec3(15, -1, 0), glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), glm::vec3(0.01f, 0.01f, 0.01f), hoverCraft, program);
 	texModels.push_back(hoverCraftOBJ);
 
-	ModelOBJ boxColor(glm::vec3(0, 0, 0), glm::vec3(10,0,0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), box, programColor);
+	Light boxColor(1, glm::vec3(1, 1, 1),glm::vec3(0, 0, 0), glm::vec3(10,10,10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), box, programColor);
 	lights.push_back(boxColor);
+
+	Light boxColor2(10, glm::vec3(10, 0.75, 0.75),glm::vec3(-10, 0, 0), glm::vec3(10, 0.75, 0.75), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), box, programColor);
+	lights.push_back(boxColor2);
 	Geometry plane2;
 	generatePlane(plane2);
 	plane2.tex.textureID = hdrTexture.frameBufferTexture[0];
@@ -380,13 +393,13 @@ void RenderManager::initScene() {
 }
 void RenderManager::renderScene(glm::mat4 viewMatrix, glm::mat4 perspectiveMatrix,glm::vec3 camPos) {
 	glBindFramebuffer(GL_FRAMEBUFFER, hdrTexture.frameBuffer);
-	glClearColor(0, 0, 0, 1.0f);
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		for (ModelOBJ model : texModels) {
 			renderTexture(model, viewMatrix, perspectiveMatrix, camPos);
 		}
-		for (ModelOBJ model : lights) {
-			renderColor(model, viewMatrix, perspectiveMatrix);
+		for (Light light : lights) {
+			renderColor(light.model, viewMatrix, perspectiveMatrix);
 		}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	hdrPlane->model.tex.textureID = hdrTexture.frameBufferTexture[1];

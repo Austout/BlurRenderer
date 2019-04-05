@@ -1,0 +1,6 @@
+This is the programming component of assignment 1
+the commands are as follows:
+KEY_UP: changes to the next fractal
+KEY_DOWN: goes to the previous fractal
+KEY_RIGHT: increases the depth of the fractal
+KEY_LEFT: decreases the depth of the fractal

@@ -22,7 +22,7 @@ public:
 	void setQuatRotation(float w) {
 		m_pRotation.w = w;
 	}
-	float getQuatRotation(float w) {
+	float getQuatRotation() {
 		return m_pRotation.w;
 	}
 	glm::vec3 getLookPos() {

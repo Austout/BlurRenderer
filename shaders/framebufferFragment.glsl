@@ -22,16 +22,15 @@ void main(void)
 
 	vec3 color = texture(mTexture, texCoord).rgb;
 	vec3 bloomColor = texture(bloomBlur, texCoord).rgb;
-	float bloomThreshold = bloomColor.length() > 1 ? 1 : bloomColor.length();
-	color = bloomColor + ((1 - bloomThreshold)*color) + color; // additive blending
+	vec3 mappedBloom = vec3(1.0) - exp(-bloomColor * exposure);
+	mappedBloom = pow(mappedBloom, vec3(1.0 / gamma));
+	color = mappedBloom + ((1 - mappedBloom)*color); // additive blending
 	
 	// reinhard tone mapping
 	//vec3 mapped = color / (color + vec3(1.0));
 	// gamma correction 
 	// Exposure tone mapping
-    //vec3 mapped = vec3(1.0) - exp(-color * exposure);
     // Gamma correction 
-	vec3 mapped = pow(color, vec3(1.0 / gamma));
 
-	FragmentColour = vec4(mapped, 1.0);
+	FragmentColour = vec4(color, 1.0);
 }

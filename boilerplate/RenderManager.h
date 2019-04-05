@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "ModelOBJ.h"
+#include "Light.h"
 #define KERNEL_SIZE_BLUR 5
 #define KERNEL_SIGMA KERNEL_SIZE_BLUR/1.5f
 using namespace std;
@@ -29,7 +30,7 @@ private:
 	void renderTexture(ModelOBJ model, glm::mat4 view, glm::mat4 proj, glm::vec3 camPos);
 	void renderColor(ModelOBJ model, glm::mat4 view, glm::mat4 proj);
 	vector<ModelOBJ> texModels;
-	vector<ModelOBJ> lights;
+	vector<Light> lights;
 
 	GLuint program;
 	GLuint programColor;

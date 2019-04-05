@@ -314,6 +314,89 @@ void generateModel(float radius, float angle, Geometry &geometry) {
 	//InitializeTexture(&(model->tex),filename,GL_TEXTURE_2D);
 	//model->geo = geometry;
 }
+void generatePlane(Geometry &geometry,float size, float subSteps) {
+	std::vector <float > points;
+	std::vector<float > normals;
+	std::vector<float > textCoords;
+
+	for (float x = -size / 2.0f; x < size/2.0f;x+=subSteps) {
+		for (float y = -size / 2.0f; y < size/2.0f; y += subSteps) {
+			points.push_back(x);
+			points.push_back(y+ subSteps);
+			points.push_back(0);
+
+			points.push_back(x + subSteps);
+			points.push_back(y + subSteps);
+			points.push_back(0);
+
+			points.push_back(x + subSteps);
+			points.push_back(y);
+			points.push_back(0);
+
+			points.push_back(x);
+			points.push_back(y + subSteps);
+			points.push_back(0);
+
+			points.push_back(x + subSteps);
+			points.push_back(y);
+			points.push_back(0);
+
+			points.push_back(x);
+			points.push_back(y);
+			points.push_back(0);
+
+			textCoords.push_back(0);
+			textCoords.push_back(1);
+
+			textCoords.push_back(1);
+			textCoords.push_back(1);
+
+			textCoords.push_back(1);
+			textCoords.push_back(0);
+
+			textCoords.push_back(0);
+			textCoords.push_back(1);
+
+			textCoords.push_back(1);
+			textCoords.push_back(0);
+
+			textCoords.push_back(0);
+			textCoords.push_back(0);
+
+			normals.push_back(0);
+			normals.push_back(0);
+			normals.push_back(-1);
+
+			normals.push_back(0);
+			normals.push_back(0);
+			normals.push_back(-1);
+
+			normals.push_back(0);
+			normals.push_back(0);
+			normals.push_back(-1);
+
+			normals.push_back(0);
+			normals.push_back(0);
+			normals.push_back(-1);
+
+			normals.push_back(0);
+			normals.push_back(0);
+			normals.push_back(-1);
+
+			normals.push_back(0);
+			normals.push_back(0);
+			normals.push_back(-1);
+		}
+	}
+	float* sphereArray = &points[0];
+	float* textureCoordsArray = &textCoords[0];
+	// call function to create and fill buffers with geometry data
+	if (!InitializeVAO(&geometry))
+		std::cout << "Program failed to intialize geometry!" << std::endl;
+
+	if (!LoadGeometry(&geometry, sphereArray,&normals[0], textureCoordsArray, points.size() / 3))
+		std::cout << "Failed to load geometry" << std::endl;
+}
 void generatePlane(Geometry &geometry) {
 	std::vector <float > points;
 	std::vector<float > normals;
@@ -392,6 +475,6 @@ void generatePlane(Geometry &geometry) {
 	if (!InitializeVAO(&geometry))
 		std::cout << "Program failed to intialize geometry!" << std::endl;
 
-	if (!LoadGeometry(&geometry, sphereArray,&normals[0], textureCoordsArray, points.size() / 3))
+	if (!LoadGeometry(&geometry, sphereArray, &normals[0], textureCoordsArray, points.size() / 3))
 		std::cout << "Failed to load geometry" << std::endl;
 }

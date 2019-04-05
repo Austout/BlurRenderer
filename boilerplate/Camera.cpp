@@ -65,7 +65,6 @@ mat4 Camera::getPerspectiveMat() const
 vec3 Camera::getCartesianPos() const
 {
 	glm::mat3 RotationMatrix = glm::toMat3(m_pRotation);
-
 	return RotationMatrix*offSetCamera + m_LookPos;
 }
 // Handle logic for changing window size.

@@ -44,5 +44,6 @@ public:
 void Gen3dModel(const char * filename, const char *texName, Geometry &geometry);
 void generateModel(float radius, float angle, Geometry &geometry);
 bool CheckGLErrors();
+void generatePlane(Geometry &geometry,float size,float subSteps);
 void generatePlane(Geometry &geometry);
 void render(Geometry model,GLuint shader,glm::mat4 view, glm::mat4 proj, glm::vec3 pos, glm::vec3 rot, glm::vec3 colourCurrent, glm::vec3 scale);

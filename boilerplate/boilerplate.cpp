@@ -111,7 +111,14 @@ void handleInput(float delta, GLFWwindow* window) {
 		pos.y -= MOVEMENT_RATE;
 		camera.setLookPos(pos);
 	}
-
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+		float rot = camera.getQuatRotation();
+		camera.setQuatRotation(rot + 0.01);
+	}
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+		float rot = camera.getQuatRotation();
+		camera.setQuatRotation(rot - 0.01);
+	}
 
 }
 int main(int argc, char *argv[])
@@ -213,6 +220,8 @@ int main(int argc, char *argv[])
 		// clear screen to a dark grey colour
 		//std::cout << "delta" << delta <<"\n";
 		handleInput(delta,window);
+		//float rot = camera.getQuatRotation();
+		//cout << rot << endl;
 		mat4 viewMatrix = camera.getToCameraMat();
 		RenderManager::getInstance()->renderScene(viewMatrix, perspectiveMatrix,camera.getLookPos());
 
