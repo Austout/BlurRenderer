@@ -23,13 +23,14 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <glfw3.h>
 
 #include "ModelOBJ.h"
 #include "texture.h"
 #include "Camera.h"
 #include "GeneralInclude.h"
 #include "RenderManager.h"
+#include "Physics/PhysicsManager.h"
 
 using namespace std;
 using namespace glm;
@@ -192,6 +193,7 @@ int main(int argc, char *argv[])
 	// moon: 2.7
 	// sun: N/A
 	RenderManager::getInstance()->initScene();
+	PhysicsManager::getInstance()->initPhysics();
 	double lastTime = 0;
 	//glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	// TODO limit max x and y
@@ -206,6 +208,7 @@ int main(int argc, char *argv[])
 		////////////////////////
 		//Translation
 		double delta = glfwGetTime() - lastTime;
+		PhysicsManager::getInstance()->update(delta);
 		lastTime = glfwGetTime();
 		sumSecond += delta;
 		if (sumSecond > 1) {
@@ -218,11 +221,10 @@ int main(int argc, char *argv[])
 		//Drawing
 		//////////
 		// clear screen to a dark grey colour
-		//std::cout << "delta" << delta <<"\n";
 		handleInput(delta,window);
-		//float rot = camera.getQuatRotation();
-		//cout << rot << endl;
+
 		mat4 viewMatrix = camera.getToCameraMat();
+
 		RenderManager::getInstance()->renderScene(viewMatrix, perspectiveMatrix,camera.getLookPos());
 
 		glfwSwapBuffers(window);

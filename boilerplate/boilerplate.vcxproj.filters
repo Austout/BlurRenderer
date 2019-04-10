@@ -19,6 +19,18 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{84179428-4bd5-4e59-adf5-cf5b56d585cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{5d82c0a8-f46b-4fb3-9dec-a694d3ee0666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{1c33686e-6fd9-49a3-8ce4-cfb9ecd00478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics\snippetvehiclecommon">
+      <UniqueIdentifier>{7ce5d958-7b64-435a-a4ec-18d1bece7b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics\snippetvehiclecommon">
+      <UniqueIdentifier>{91d305f7-cfc7-4641-a75b-8ea2889c38cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="boilerplate.cpp">
@@ -41,6 +53,33 @@
     </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsCallBack.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsManager.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicle4WCreate.cpp">
+      <Filter>Source Files\Physics\snippetvehiclecommon</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleCreate.cpp">
+      <Filter>Source Files\Physics\snippetvehiclecommon</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleFilterShader.cpp">
+      <Filter>Source Files\Physics\snippetvehiclecommon</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleNoDriveCreate.cpp">
+      <Filter>Source Files\Physics\snippetvehiclecommon</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleSceneQuery.cpp">
+      <Filter>Source Files\Physics\snippetvehiclecommon</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleTankCreate.cpp">
+      <Filter>Source Files\Physics\snippetvehiclecommon</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleTireFriction.cpp">
+      <Filter>Source Files\Physics\snippetvehiclecommon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +131,30 @@
     </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsCallBack.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsManager.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleConcurrency.h">
+      <Filter>Header Files\Physics\snippetvehiclecommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleCreate.h">
+      <Filter>Header Files\Physics\snippetvehiclecommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleFilterShader.h">
+      <Filter>Header Files\Physics\snippetvehiclecommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleSceneQuery.h">
+      <Filter>Header Files\Physics\snippetvehiclecommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleTireFriction.h">
+      <Filter>Header Files\Physics\snippetvehiclecommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleWheelQueryResult.h">
+      <Filter>Header Files\Physics\snippetvehiclecommon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

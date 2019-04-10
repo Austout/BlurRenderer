@@ -81,12 +81,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\middleware\glfw\include;$(ProjectDir)..\middleware\glad\include;$(ProjectDir)..\middleware\stb;$(ProjectDir)..\middleware\glm-0.9.8.2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\middleware\glad\include;$(ProjectDir)..\middleware\stb;$(ProjectDir)..\middleware\glm-0.9.8.2;$(ProjectDir)..\Dependencies\PhysX\includes\collision;$(ProjectDir)..\Dependencies\PhysX\includes;$(ProjectDir)..\Dependencies\glfw\debug;$(ProjectDir)..\Dependencies\glfw\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\middleware\stb;$(ProjectDir)..\middleware\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\middleware\stb;$(ProjectDir)..\Dependencies\glfw\debug;$(ProjectDir)..\Dependencies\PhysX\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;PhysXExtensions_static_32.lib;PhysXCooking_32.lib;PhysX_32.lib;PhysXCommon_32.lib;PhysXFoundation_32.lib;PhysXPvdSDK_static_32.lib;PhysXVehicle_static_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -138,6 +139,15 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="ModelOBJ.cpp" />
+    <ClCompile Include="Physics\PhysicsCallBack.cpp" />
+    <ClCompile Include="Physics\PhysicsManager.cpp" />
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicle4WCreate.cpp" />
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleCreate.cpp" />
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleFilterShader.cpp" />
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleNoDriveCreate.cpp" />
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleSceneQuery.cpp" />
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleTankCreate.cpp" />
+    <ClCompile Include="Physics\snippetvehiclecommon\SnippetVehicleTireFriction.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
@@ -159,6 +169,14 @@
     <ClInclude Include="GeneralInclude.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="ModelOBJ.h" />
+    <ClInclude Include="Physics\PhysicsCallBack.h" />
+    <ClInclude Include="Physics\PhysicsManager.h" />
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleConcurrency.h" />
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleCreate.h" />
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleFilterShader.h" />
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleSceneQuery.h" />
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleTireFriction.h" />
+    <ClInclude Include="Physics\snippetvehiclecommon\SnippetVehicleWheelQueryResult.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="texture.h" />
   </ItemGroup>
